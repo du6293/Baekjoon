@@ -1,0 +1,28 @@
+from math import gcd
+ 
+N = int(input())  
+ 
+already = [] 
+for i in range(0,N):
+    a = int(input())
+    already.append(a)
+ 
+gap_list =[]  
+for i in range(0,len(already)-1):
+    gap = already[i+1] - already[i]
+    gap_list.append(gap)
+ 
+ 
+n = gap_list[0]
+final = []
+for i in range(1,len(gap_list)): 
+    n = gcd(n,gap_list[i])
+final.append(n)
+ 
+ 
+sum = 0
+for i in range(0,len(gap_list)):
+    a = (gap_list[i]//final[-1]) - 1
+    sum += a
+ 
+print(sum)
