@@ -1,0 +1,10 @@
+T = int(input())
+
+for i in range(1,T+1):
+    N,M = map(int, input().split())
+
+    counter = 0
+    for k in range(N, M+1):
+        s = str(k)
+        counter += s.count("0")
+    print(counter)
