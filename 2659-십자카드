@@ -1,0 +1,55 @@
+n = list(map(int,input().split()))
+ 
+ 
+def cross(num):  
+    new_num_list = []  
+    final_num_list = []
+    for i in range(0,4):
+        new_num = num[i:] + num[0:i]
+        new_num_list.append(new_num)
+        final_num = new_num_list[i][0]*1000 + new_num_list[i][1]*100 + new_num_list[i][2]*10 + new_num_list[i][3]*1
+        final_num_list.append(final_num)
+        a = min(final_num_list)
+       
+    return a
+        
+ 
+m = cross(n)  
+ 
+ 
+def make_list(num):  
+    number_list = []
+    x = num // 1000
+    y = (num - x * 1000) // 100
+    z = (num - x * 1000 - y * 100) // 10
+    w = (num - x * 1000 - y * 100 - z * 10)
+    number_list.append(x)
+    number_list.append(y)
+    number_list.append(z)
+    number_list.append(w)
+    return number_list
+ 
+def make_n(num):  
+    g = num[0] * 1000 + num[1] * 100 + num[2] * 10 + num[3] * 1
+    return g 
+ 
+ 
+v = make_list(m)
+ 
+ 
+clock_number = []
+ 
+for i in range(v[0],0,-1):
+    for j in range(v[1],0,-1):
+        for k in range(v[2],0,-1):
+            for p in range(v[3],0,-1):
+                a = 1000*i+100*j+10*k+1*p  
+                b = make_list(a) 
+                c = cross(b)
+                if a == c:
+                    clock_number.append(a)
+            v[3] = 9
+        v[2] = 9
+    v[1] = 9
+ 
+print(len(clock_number))
