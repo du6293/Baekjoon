@@ -1,0 +1,26 @@
+N, k = list(map(int, input().split()))
+
+people = []
+
+ans = []  # 정답을 담을 리스트
+
+for i in range(1,N+1):
+    people.append(i)
+
+
+  # 제거하려는 인덱스 시작
+a = people.pop(k-1)
+ans.append(a)
+
+i = (k-1)  # 2부터 시작 & len(people) == 6
+
+while len(people) > 0:
+
+    b = ((i + (k -1))  % (len(people)))
+
+    c = people.pop(b)
+    ans.append(c)
+    
+    i = b
+
+print("<%s>" %(", ".join(map(str,ans))))
