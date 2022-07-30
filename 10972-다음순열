@@ -1,0 +1,23 @@
+N = int(input())  
+array = list(map(int, input().split()))
+
+if array == sorted(array,reverse = True):   # 입력된 순열이 맨 마지막 순서인 내림차순인 순열일 때
+    print("-1")
+
+ 
+
+ 
+
+else:
+    n = 0
+    for i in range(N-1,0,-1):  # 마지막 인덱스부터 첫번째 인덱스 순으로 
+        if array[i-1] < array[i]:  # 앞의 숫자가 뒤의 숫자보다 작을 때
+            n = i-1
+            break  # 이 때 인덱스는 최대여야 한다.
+
+    for j in range(N-1,0,-1):  # 마지막 인덱스부터 첫번째 인덱스 순으로
+        if array[n] < array[j]:
+            array[n], array[j] = array[j], array[n]  # 스왑
+            array = array[:n+1] + sorted(array[n+1:])  # next permutation
+            print(*array)  # 리스트를 순열형식으로 출력
+            break
