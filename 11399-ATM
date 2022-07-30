@@ -1,0 +1,16 @@
+N = int(input())  # 줄을 서 있는 사람의 수
+
+time = list(map(int,input().split())) # N명의 사람이 돈을 인출하는 데 걸리는 시간
+
+Time = sorted(time) # 오름차순 정렬
+
+
+
+real_time = []  # 빈 리스트 생성
+for i in range(0,N):
+    real_time.append(Time[i] * (N - (i)))
+   
+sum = 0
+for k in range(0,N):
+    sum += real_time[k]
+print(sum)
