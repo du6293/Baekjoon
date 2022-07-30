@@ -1,0 +1,21 @@
+import sys
+import heapq
+
+n = int(sys.stdin.readline()) # 연산의 개수
+
+array = []
+for i in range(n):
+    a = int(sys.stdin.readline())
+    array.append(a)
+
+
+ans = []
+for i in array:
+    if i > 0:
+        heapq.heappush(ans,-i)
+
+    elif i == 0:
+        if len(ans) == 0:
+            print(0)
+        else:
+            print( abs(heapq.heappop(ans)))
