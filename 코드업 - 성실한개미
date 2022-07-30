@@ -1,0 +1,39 @@
+ant = [list(map(int, input().split())) for _ in range(10)]  # 10 * 10 크기 생성
+
+i = 1  # x 좌표
+j = 1  # y 좌표시작점
+ant[1][1] = 9
+while True:
+    if  (ant[i][j+1] == 0 ) :   # 오른쪽이 0
+            j += 1 
+            ant[i][j] = 9
+
+
+    elif (ant[i][j+1] == 1 ): # 오른쪽이 1
+        if (ant[i+1][j] == 0 ) :  # 아래쪽이 0
+            i += 1 
+            ant[i][j] = 9
+
+
+        elif (ant[i+1][j] == 1 ):  # 아래쪽이 1
+            break
+
+
+        elif (ant[i+1][j] == 2 ):  # 아래쪽에 2
+            i += 1
+            ant[i][j] = 9
+            break
+
+    elif (ant[i][j+1] == 2 ): # 오른쪽이 2
+        j += 1
+        ant[i][j] = 9
+        break
+
+
+
+for i in range(10):
+    for j in range(10):
+        print(ant[i][j], end = " ")
+    print()
+
+ 
