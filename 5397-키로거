@@ -1,0 +1,43 @@
+import sys
+n = int(sys.stdin.readline())  # 입력받는 횟수
+# 대문자, 소문자, 숫자, 백스페이스,화살표<>
+password = [input() for _ in range(n)]  # 1차원 배열에 문자열 형식으로
+
+
+
+for i in range(len(password)):
+    a = (list(password[i]))
+    stack = []
+    point = 0
+    for j in range(len(a)):
+        
+        if a[j] == "<":
+            
+            if point <= 0:
+                point = 0
+
+            else:
+                point -=1
+
+        elif a[j] == ">":
+            if point >= (len(stack)):
+                point =  len(stack)
+            else:
+                point += 1
+        elif a[j] == "-":
+            
+            if len(stack) <= 0:
+                point = 0
+                stack.append("")
+            else:   
+                stack.pop(point-1)
+                point-=1
+        else:
+            stack.insert(point,a[j])
+            point += 1
+            
+
+    s = ""
+    for k in range(0,len(stack)):
+        s +=stack[k]
+    print(s)
