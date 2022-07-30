@@ -1,0 +1,29 @@
+Board = input()
+
+i = 0
+while True:
+    if i >= len(Board):
+        break
+    
+    elif Board[i:i+4] == "XXXX":
+        i += 4
+        Board = Board.replace("X","A",4)
+        
+        
+
+    elif Board[i:i+2] == "XX":
+        i += 2
+        Board = Board.replace("X","B",2)
+        
+
+    elif Board[i] == ".":
+        i += 1
+
+    
+
+    else: 
+        Board = -1
+        break
+
+    
+print(Board)
