@@ -1,0 +1,65 @@
+from itertools import combinations  # 조합함수
+
+N = int(input())  # 짝수
+
+e = [list(map(int,input().split())) for _ in range(N)]  # 능력치 입력받기
+
+
+member = [i+1 for i in range(N)]
+
+possible_team = []
+for team in list(combinations(member, N //2)):
+    possible_team.append(team)
+
+
+start_team = []
+
+for i in range(0,len(possible_team)//2):
+    start_team.append(possible_team[i])
+
+
+link_team = []
+for i  in range(len(possible_team)-1,len(possible_team)//2-1,-1):
+    link_team.append(possible_team[i])
+
+
+
+
+# 팀 내에서 두명씩 조합 만들기
+semi_start_team = []
+semi_link_team = []
+
+for i in range(len(possible_team)//2):
+    semi_start_team.append( list(combinations(start_team[i],2)))
+    semi_link_team.append( list(combinations(link_team[i],2)))
+
+
+
+
+final_a_score=[]
+final_b_score=[]
+for i in range(len(start_team)):
+    a_score = []
+    b_score = []
+    scorea=0
+    scoreb=0
+    for j in range(len(semi_start_team[i])):
+        a = semi_start_team[i][j][0]
+        b = semi_start_team[i][j][1]
+        scorea += e[a-1][b-1]+e[b-1][a-1]
+        c = semi_link_team[i][j][0]
+        d = semi_link_team[i][j][1]
+        scoreb += e[c-1][d-1]+e[d-1][c-1]
+    a_score.append(scorea)
+    b_score.append(scoreb)
+    final_a_score.append(a_score)
+    final_b_score.append(b_score)
+
+
+
+sscore = []
+for i in range(len(possible_team)//2):
+    g = abs(final_a_score[i][0] - final_b_score[i][0])
+    sscore.append(g)
+
+print(min(sscore))
