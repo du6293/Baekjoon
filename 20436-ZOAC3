@@ -1,0 +1,82 @@
+sl,sr = list(input().split())
+ 
+s =list(map(str,input()))
+ 
+ 
+left = [['q','w','e','r','t'],
+        ['a','s','d','f','g'],
+        ['z','x','c','v','']]
+right = [['','','','','','y','u','i','o','p'],
+        ['','','','','','h','j','k','l'],
+        ['','','','','b','n','m','','']]
+ 
+ 
+# 왼손 좌표 찾기
+def findleft(l_hand):
+    
+    for i in range(len(left)): # 행 > y좌표
+        for j in range(len(left[i])):  # 열 > x좌표
+            if left[i][j] == l_hand:
+                
+                return j,i
+    
+            
+ 
+ 
+# 오른손 좌표 찾기
+def findright(r_hand):
+    
+    for i in range(len(right)): # 행 > y좌표
+        for j in range(len(right[i])):  # 열 > x좌표
+            if right[i][j] == r_hand:
+                
+                return j,i
+ 
+ 
+sleft=[]  # 왼손에 해당하는 문자를 저장
+sright=[]  #오른손에 해당하는 문자를 저장
+for k in range(0,len(s)):
+    for i in range(0,len(left)):
+            if s[k] in left[i]:
+                sleft.append(s[k])
+       
+for k in range(0,len(s)):
+    for i in range(0,len(right)):
+        if s[k] in right[i]:
+            sright.append(s[k])
+sleft.insert(0,sl)
+sright.insert(0,sr)
+ 
+ 
+l_location=[] # 왼손 키들 각각의 위치
+for i in range(0,len(sleft)):
+    a = findleft(sleft[i])
+    l_location.append(a)
+ 
+ 
+l_time = [] # 왼손) 키들 각각의 이동 시간
+for i in range(0,len(l_location)-1):
+    t = abs(l_location[i][0]-l_location[i+1][0]) + abs(l_location[i][1]-l_location[i+1][1])
+    l_time.append(t)
+ 
+ 
+r_location = [] #오른손 키들 각각의 위치
+for i in range(0,len(sright)):
+    a = findright(sright[i])
+    r_location.append(a)
+ 
+r_time = []  # 오른손) 키들 각각의 이동 시간
+for i in range(0,len(r_location)-1):
+    t = abs(r_location[i][0]-r_location[i+1][0]) + abs(r_location[i][1]-r_location[i+1][1])
+    r_time.append(t)
+ 
+l_sum = 0  # 왼손 총시간
+for i in range(len(l_time)):
+    l_sum = l_sum +  l_time[i]
+ 
+r_sum = 0  # 오른손 총 시간
+for i in range(len(r_time)):
+    r_sum = r_sum + r_time[i]
+ 
+final_time = l_sum + r_sum + (len(s))  # 총 걸린 시간
+print(final_time)
