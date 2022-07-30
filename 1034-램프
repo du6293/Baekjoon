@@ -1,0 +1,62 @@
+import sys
+from collections import Counter
+n, m = map(int,sys.stdin.readline().split())  # 행의 갯수, 열의 갯수
+
+matrix = []  # 모든 행의 값을 저장
+for i in range(n):
+    array = list(map(int,input())) # 한 행
+    matrix.append(array)
+
+
+# 0 의 갯수를 세리는 함수
+def count_zero(num): # 인자 : 리스트
+    cnt = 0
+    for i in range(len(num)):
+        if num[i] == 0:
+            cnt += 1
+        else:
+            cnt+= 0
+    return cnt
+
+def fail():
+    return 0
+
+
+k = int(input())  # 열마다 스위치 변경 횟수
+
+possible_matrix = []
+for i in range(n): # matrix의 행에서
+    if k % 2 == 1:   # k가 홀수일 때
+        if count_zero(matrix[i])  % 2 == 1 :
+            if count_zero(matrix[i]) <= k:  # 홀 홀
+                possible_matrix.append(matrix[i])
+            else:
+                pass
+        elif count_zero(matrix[i]) % 2 == 0:  
+            pass
+
+    elif k % 2 == 0: # k가 짝수일 때
+        if count_zero(matrix[i]) % 2 == 0 :
+            if count_zero(matrix[i]) <= k:
+                possible_matrix.append(matrix[i])
+            else:
+                pass
+        elif count_zero(matrix[i])  % 2 ==1:
+            pass
+        
+
+if len(possible_matrix) == 0:
+    print(0)
+else:
+    final_matrix = []
+    for i in range(len(possible_matrix)):
+        
+        a = "".join([str(_) for _ in possible_matrix[i]])
+        # print(a)
+
+        final_matrix.append(a)a
+
+    # print(final_matrix)
+    count = Counter(final_matrix)
+    # print(count)
+    print(max(list(count.values())))
