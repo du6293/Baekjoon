@@ -1,0 +1,70 @@
+from itertools import permutations  # 순열
+n = int(input())  # 추측하는 횟수
+hint = [list(map(int,input().split())) for _ in range(n)]  # 힌트 입력받기
+# print(hint)
+number = ['1','2','3','4','5','6','7','8','9']
+
+
+example = list(permutations(number,3))  # 모든 경우의 수
+example_ = []  # [['1','2','3'], ...] 형태
+for i in range(len(example)):
+    example_.append(list(example[i]))
+
+
+def make_list(l,n):
+    for i in range(len(hint)):
+        l.append(hint[i][n])
+    return l 
+
+
+ans = []  # 대답한 숫자들 [123,356,327,489]
+make_list(ans,0)
+
+
+answer = []  # 대답한 숫자들을 각 자릿수만큼 문자열로 분할 
+                # [['1', '2', '3'], ['3', '5', '6'], ['3', '2', '7'], ['4', '8', '9']]
+for i in range(len(ans)):
+    a=list(str(ans[i]))
+    answer.append(a)
+
+
+def score(list1,list2):
+    strike = 0
+    ball = 0
+    for i in range(0,3):
+        for j in range(0,3):
+            if list1[i] == list2[j] and i == j:
+                strike += 1
+                ball+=0
+            elif list1[i] == list2[j] and i != j:
+                strike+=0
+                ball += 1
+            else:
+                strike+= 0
+                ball +=0
+    
+    result = []
+   
+    
+    A = int(str(list2[0]) + str(list2[1]) + str(list2[2]))
+    result.append(A)
+    result.append(strike)
+    result.append(ball)
+    
+    return result
+
+c = []  
+i = 0
+while i < len(example_):  
+    res = []
+    for j in range(len(answer)):
+        res.append(score(example_[i],answer[j]))
+    c.append(res)
+    i +=1
+
+p = []
+for k in range(len(c)):
+    if c[k] == hint:
+        p.append(c[k])
+
+print(len(p))
