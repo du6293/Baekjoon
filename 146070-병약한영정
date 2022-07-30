@@ -1,0 +1,39 @@
+N = int(input()) # 약의 종류의 개수
+ 
+effect = []  # 효능을 저장하는 리스트
+name = []  # 약의 이름을 저장하는 리스트
+for i in range(N):
+    a ,b = list(map(str,input().split()))
+    effect.append(a)
+    name.append(b)
+ 
+s = []
+R = int(input())  #영정이가 겪는증상의 수
+for i in range(R):
+    c = list(map(str,input().split()))  # 첫번째 인덱스: 증상개수, 그 이후 인덱스:  증상이름
+    s.append(c)
+ 
+ss = []  # cnt를 인자로 하는 리스트
+for i in range(0,R):
+    cnt = 0
+    for j in range(1,len(s[i])):
+        if s[i][j] in effect:
+            cnt +=0
+        else:
+            cnt += 1
+    ss.append(cnt)
+ 
+ 
+def matching(l):  # 증상을 모두 치료할 수 있을 때 name과 매칭시키는 ㅏㅁ수
+    p = []
+    for i in range(1,len(l)):
+        for k in range(0,N):
+            if l[i] == effect[k]:
+                p.append(name[k])
+    print(' '.join(p))  # 출력 형태
+ 
+for i in range(0,R):
+    if ss[i] ==0:  # 증상을 모두 치료할 수 있을 때
+        matching(s[i])
+    elif ss[i] != 0:  # 치료 불가한 증상이 하나이상 있을 
+        print("YOU DIED")
