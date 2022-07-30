@@ -1,0 +1,23 @@
+N = int(input())## 오늘 하루 동안 팔린 책의 개수
+book = []  # 팔린 책 제목을 담을 빈 리스트
+
+for i in range (0,N):
+  
+  book.append(input())
+# print(book)
+
+frequency = []  # 책 제목마다의 빈도수를 담을 리스트
+
+for j in range(0,N):
+
+  
+  frequency.append(book.count(book[j]))
+
+max_book = [] # 빈도수가 최대인 인덱스만 담을 리스트
+for k in range(0,N):
+  if book.count(book[k]) == max(frequency):
+    max_book.append(book[k])
+
+
+max_book.sort()  # 사전순으로 정렬
+print(max_book[0])  # 맨 첫번째 인덱스를 출력
