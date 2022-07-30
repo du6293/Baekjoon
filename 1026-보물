@@ -1,0 +1,11 @@
+N = int(input())
+a = list(map(int,input().split()))
+b = a = list(map(int,input().split()))
+
+a.sort()
+b.sort()
+
+s = 0
+for k in range(N):
+  s += a[k] * b[k]
+print(s)
