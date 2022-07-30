@@ -1,0 +1,45 @@
+import math
+import sys
+
+
+n = int(sys.stdin.readline())  #편의시설 갯수
+
+location = []  # 편의시설의 위치를 n개 저장할 리스트
+for i in range(n):
+    a = list(map(int,input().split()))
+    location.append(a)
+# print(location)
+
+
+def length(x,y,z,w):
+    p = (x-z)**2 + (y - w) **2
+    ans = math.sqrt(p)
+    return ans
+
+distance=[]
+for i in range(n):
+    b = []
+    for j in range(n):
+        if j != i:
+            p = length(location[i][0],location[i][1],location[j][0],location[j][1])
+            b.append(p)
+    distance.append(b)
+# print(distance)
+# print(len(distance))
+
+max_d = []
+for i in range(n):
+    for j in range (len(distance[i])):
+        d = max(distance[i])
+    max_d.append(d)
+# print(max_d)
+
+
+tt = []
+for k in range(n):
+    if (max_d[k]) == min(max_d):
+        t = k
+        tt.append(t)
+        
+kk = tt[0]
+print(location[kk][0],location[kk][1])
