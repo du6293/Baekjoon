@@ -1,0 +1,33 @@
+N = int(input())  # 스위치의 갯수
+ 
+T = list(map(int,input().split()))  # 스위치의 처음 상태
+ 
+s = int(input())  # 학생 수
+ 
+ 
+def change(num):
+    if T[num] == 0:
+        T[num] = 1
+    else:
+        T[num] = 0
+ 
+ 
+for r in range(s):
+    gender, num = map(int,input().split())
+    if gender == 1:  # 남자
+        for i in range(0,N):
+            if (i + 1) % num == 0:
+                change(i)
+                
+    elif gender == 2:  # 여자
+        a = 1
+ 
+        while num -1 -a >= 0 and num-1+a <= N-1 and T[num-1-a] == T[num-1+a]:
+            a += 1
+        
+        for i in range(num-1-(a-1),num-1+(a-1)+1):
+            change(i)
+            
+          
+for i in range(0,N,20):
+    print(*T[i:i+20])
